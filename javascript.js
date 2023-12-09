@@ -32,6 +32,17 @@ operator = "";
 a = 7;
 b = 5;
 
+// select all the buttons with the class name "btn"
+const buttons = document.querySelectorAll(".btn");
+
+// loop through each button and add a click event listener
+buttons.forEach(function(button) {
+  button.addEventListener("click", function() {
+        
+    console.log("You clicked a button");
+  });
+});
+
 alert(add(a, b));
 alert(subtract(a, b));
 alert(multiply(a, b));
