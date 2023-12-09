@@ -38,12 +38,8 @@ const buttons = document.querySelectorAll(".btn");
 // loop through each button and add a click event listener
 buttons.forEach(function(button) {
   button.addEventListener("click", function() {
-        
+    // populateDisplay();
     console.log("You clicked a button");
+    console.log(button);
   });
 });
-
-alert(add(a, b));
-alert(subtract(a, b));
-alert(multiply(a, b));
-alert(divide(a, b));
