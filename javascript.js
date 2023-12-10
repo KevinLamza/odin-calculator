@@ -13,6 +13,7 @@ function operationMultiply (a, b) {
 
 function operationDivide (a, b) {
     if (b === 0) {
+        clearEverything();
         return "You can't divide by zero!"
     } else {
         return roundToDecimal(a / b);
@@ -282,17 +283,7 @@ function populateDisplay(button) {
         case "btnClear":
             // clear
             // console.log(button.id)
-            flagNumber1 = false;
-            flagOperator = false;
-            flagNumber2 = false;
-            flagPrevCalc = false;
-           
-            number1 = 0;
-            number2 = 0;
-            operator = "";
-            result = 0;
-            display.textContent = "";
-            printEverything();
+            clearEverything();
             break;
         case "btnDelete":
             // delete
@@ -317,6 +308,20 @@ function printEverything() {
 
 function roundToDecimal(number) {
     return Math.round(number * 1000000000) / 1000000000;
+}
+
+function clearEverything() {
+    flagNumber1 = false;
+    flagOperator = false;
+    flagNumber2 = false;
+    flagPrevCalc = false;
+    
+    number1 = 0;
+    number2 = 0;
+    operator = "";
+    result = 0;
+    display.textContent = "";
+    printEverything();
 }
 
 // variables for two numbers and operator
