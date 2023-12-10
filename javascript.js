@@ -15,7 +15,7 @@ function operationDivide (a, b) {
     if (b === 0) {
         return "You can't divide by zero!"
     } else {
-        return a / b;
+        return roundToDecimal(a / b);
     }
 }
 
@@ -302,6 +302,10 @@ function printEverything() {
     console.log("fOp: " + flagOperator);
     console.log("fNum2: " + flagNumber2);
     console.log("fPrevC: " + flagPrevCalc);
+}
+
+function roundToDecimal(number) {
+    return Math.round(number * 1000000000) / 1000000000;
 }
 
 // variables for two numbers and operator
