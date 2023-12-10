@@ -14,6 +14,7 @@ function operationMultiply (a, b) {
 function operationDivide (a, b) {
     if (b === 0) {
         clearEverything();
+        divisionError = true;
         return "You can't divide by zero!"
     } else {
         return roundToDecimal(roundToDecimal(a) / roundToDecimal(b));
@@ -45,6 +46,7 @@ function populateDisplay(button) {
         case "btnNum8":
         case "btnNum9":
         case "btnNum0":
+            if (divisionError === false) { 
             // if no buttons pressed yet, save number and update flag for number 1
             if (flagNumber1 === false 
                 && flagOperator === false
@@ -92,13 +94,14 @@ function populateDisplay(button) {
                     number2 = Number(String(number2) + button.textContent);
                     display.textContent = number2;
                     number1 = result;
-                }
+                }}         
             printEverything();
             break;
         case "btnAdd":
         case "btnSubtract":
         case "btnMultiply":
         case "btnDivide":
+            if (divisionError === false) {
             // if no numbers have been pressed yet, do nothing
             if (flagNumber1 === false 
                 && flagOperator === false
@@ -199,7 +202,7 @@ function populateDisplay(button) {
                     else if (button.id === "btnSubtract") {operator = "subtract";}
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
-                }
+                }}
                 toggleDecimal = false;
                 printEverything();
                 break;
@@ -213,6 +216,7 @@ function populateDisplay(button) {
             // roundDecimal() für alle operations a und b
             // bei division auch beim result
             // wenn mit punkt endet muss auch behandelt werden
+            if (divisionError === false) {
             if (toggleDecimal === false) {
                 if (flagNumber1 === false 
                     && flagOperator === false
@@ -239,12 +243,13 @@ function populateDisplay(button) {
                     && flagNumber2 === true) {
                         number2 = (String(number2) + ".")
                         display.textContent = number2;
-                    }
+                    }}
             toggleDecimal = true;
             printEverything();
             }
             break;
         case "btnEquals":
+            if (divisionError === false) {
             if (flagNumber1 === true 
                 && flagOperator === true
                 && flagNumber2 === true) {
@@ -298,7 +303,7 @@ function populateDisplay(button) {
                     display.textContent = result;
                     number1 = 0;
                     number2 = 0;
-                }
+                }}
                 toggleDecimal = false;
             printEverything();
             break;
@@ -340,6 +345,7 @@ function clearEverything() {
     // flagPrevCalc = false;
 
     toggleDecimal = false;
+    divisionError = false;
     
     number1 = 0;
     number2 = 0;
@@ -356,6 +362,7 @@ let number2 = 0;
 let result = 0;
 
 let toggleDecimal = false;
+let divisionError = false;
 
 let flagNumber1 = false;
 let flagOperator = false;
