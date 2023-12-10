@@ -1,14 +1,14 @@
 // declare four functions for four basic math operations
 function operationAdd (a, b) {
-    return roundToDecimal(a) + roundToDecimal(b);
+    return roundToDecimal(roundToDecimal(a) + roundToDecimal(b));
 }
 
 function operationSubtract (a, b) {
-    return roundToDecimal(a) - roundToDecimal(b);
+    return roundToDecimal(roundToDecimal(a) - roundToDecimal(b));
 }
 
 function operationMultiply (a, b) {
-    return roundToDecimal(a) * roundToDecimal(b);
+    return roundToDecimal(roundToDecimal(a) * roundToDecimal(b));
 }
 
 function operationDivide (a, b) {
@@ -207,15 +207,6 @@ function populateDisplay(button) {
                 printEverything();
                 break;
         case "btnDot":
-            // add dot
-            // console.log(button.id)
-            // if flagnum1, flagop, flagnum2
-            // zero point .. or number.decimal
-            // set flag to true for decimal
-            // unset flag with operator button 
-            // roundDecimal() für alle operations a und b
-            // bei division auch beim result
-            // wenn mit punkt endet muss auch behandelt werden
             if (divisionError === false) {
             if (toggleDecimal === false) {
                 if (flagNumber1 === false 
@@ -308,13 +299,30 @@ function populateDisplay(button) {
             printEverything();
             break;
         case "btnClear":
-            // clear
-            // console.log(button.id)
             clearEverything();
             break;
         case "btnDelete":
             // delete
-            // console.log(button.id)
+            if (flagNumber1 === true 
+                && flagOperator === false
+                && flagNumber2 === false) {
+                    number1 = Number(String(number1).slice(0, -1));
+                    display.textContent = number1;
+                }
+            if (flagNumber1 === true 
+                && flagOperator === true
+                && flagNumber2 === true) {
+                    number2= Number(String(number2).slice(0, -1));
+                    display.textContent = number2;
+                }
+            if (flagNumber1 === false 
+                && flagOperator === false
+                && flagNumber2 === false) {
+                    result = Number(String(result).slice(0, -1));
+                    if (result === 0) display.textContent = "";
+                    else display.textContent = result;
+                }
+            printEverything();
             break;
         default:
             console.log("Invalid button ID");
