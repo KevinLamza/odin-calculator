@@ -1,14 +1,14 @@
 // declare four functions for four basic math operations
 function operationAdd (a, b) {
-    return a + b;
+    return roundToDecimal(a) + roundToDecimal(b);
 }
 
 function operationSubtract (a, b) {
-    return a - b;
+    return roundToDecimal(a) - roundToDecimal(b);
 }
 
 function operationMultiply (a, b) {
-    return a * b;
+    return roundToDecimal(a) * roundToDecimal(b);
 }
 
 function operationDivide (a, b) {
@@ -16,7 +16,7 @@ function operationDivide (a, b) {
         clearEverything();
         return "You can't divide by zero!"
     } else {
-        return roundToDecimal(a / b);
+        return roundToDecimal(roundToDecimal(a) / roundToDecimal(b));
     }
 }
 
@@ -48,69 +48,53 @@ function populateDisplay(button) {
             // if no buttons pressed yet, save number and update flag for number 1
             if (flagNumber1 === false 
                 && flagOperator === false
-                && flagNumber2 === false
-                && flagPrevCalc === false) {
+                && flagNumber2 === false) {
                     flagNumber1 = true;
                     number1 = Number(button.textContent);
                     display.textContent = number1;
-                    printEverything();
-                    break;
                 }
             // if number1 is pressed again with no operator yet, expand number1, flags stay the same
-            if (flagNumber1 === true
+            else if (flagNumber1 === true
                 && flagOperator === false
-                && flagNumber2 === false
-                && flagPrevCalc === false) {
+                && flagNumber2 === false) {
                     flagNumber1 = true;
                     number1 = Number(String(number1) + button.textContent);
                     display.textContent = number1;
-                    printEverything();
-                    break;
                 }
             // number is pressed with number1 and operator flag true, set flag for number2 true and update display
-            if (flagNumber1 === true
+            else if (flagNumber1 === true
                 && flagOperator === true
-                && flagNumber2 === false
-                && flagPrevCalc === false) {
+                && flagNumber2 === false) {
                     flagNumber2 = true;
                     number2 = Number(button.textContent);
                     display.textContent = number2;
-                    printEverything();
-                    break;
                 }
             // if number is pressed with flags number1, operator and number2 true, expand number2 and update display
-            if (flagNumber1 === true
+            else if (flagNumber1 === true
                 && flagOperator === true
-                && flagNumber2 === true
-                && flagPrevCalc === false) {
+                && flagNumber2 === true) {
                     flagNumber2 = true;
                     number2 = Number(String(number2) + button.textContent);
                     display.textContent = number2;
-                    printEverything();
-                    break;
                 }
-            if (flagNumber1 === true
+            else if (flagNumber1 === true
                 && flagOperator === true
-                && flagNumber2 === true
-                && flagPrevCalc === true) {
+                && flagNumber2 === true) {
                     flagNumber2 = true;
                     number2 = Number(String(number2) + button.textContent);
                     display.textContent = number2;
-                    printEverything();
-                    break;
                 }
             // save next number for chained operation
-            if (flagNumber1 === true
+            else if (flagNumber1 === true
                 && flagOperator === true
-                && flagNumber2 === false
-                && flagPrevCalc === true) {
+                && flagNumber2 === false) {
                     flagNumber2 = true;
                     number2 = Number(String(number2) + button.textContent);
                     display.textContent = number2;
                     number1 = result;
-                    printEverything();
-                    break;
                 }
+            printEverything();
+            break;
         case "btnAdd":
         case "btnSubtract":
         case "btnMultiply":
@@ -118,17 +102,32 @@ function populateDisplay(button) {
             // if no numbers have been pressed yet, do nothing
             if (flagNumber1 === false 
                 && flagOperator === false
-                && flagNumber2 === false
-                && flagPrevCalc === false) {
-                    printEverything();
-                    break;
+                && flagNumber2 === false) {
+                    flagOperator = true;
+                    flagNumber1 = true;
+                    number1 = result;
+                    if (button.id === "btnAdd") {operator = "add";}
+                    else if (button.id === "btnSubtract") {operator = "subtract";}
+                    else if (button.id === "btnMultiply") {operator = "multiply";}
+                    else if (button.id === "btnDivide") {operator = "divide";}
                 }
             // if number1 has been pressed already, save operator and set operator flag to true
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === false
-                && flagNumber2 === false
-                && flagPrevCalc === false) {
+                && flagNumber2 === false) {
                     flagOperator = true;
+                    if (button.id === "btnAdd") {operator = "add";}
+                    else if (button.id === "btnSubtract") {operator = "subtract";}
+                    else if (button.id === "btnMultiply") {operator = "multiply";}
+                    else if (button.id === "btnDivide") {operator = "divide";}
+                    // console.log(operator);
+                }
+            else if (flagNumber1 === false 
+                && flagOperator === false
+                && flagNumber2 === false) {
+                    flagNumber1 = true;
+                    flagOperator = true;
+                    number1 = result;
                     // console.log(button.id);
                     // console.log(operator);
                     if (button.id === "btnAdd") {
@@ -140,56 +139,44 @@ function populateDisplay(button) {
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
                     // console.log(operator);
-                    printEverything();
-                    break;
                 }
             // if press operator for a second time, update it to the new one, flags stay the same
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === true
-                && flagNumber2 === false
-                && flagPrevCalc === false) {
+                && flagNumber2 === false) {
                     flagOperator = true;
                     if (button.id === "btnAdd") {operator = "add";}
                     else if (button.id === "btnSubtract") {operator = "subtract";}
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
-                    printEverything();
-                    break;
                 }
             // if chained operation, accept a new operator 
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === false
-                && flagNumber2 === false
-                && flagPrevCalc === true) {
+                && flagNumber2 === false) {
                     flagOperator = true;
                     number2 = 0;
                     if (button.id === "btnAdd") {operator = "add";}
                     else if (button.id === "btnSubtract") {operator = "subtract";}
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
-                    printEverything();
-                    break;
                 }
             // if chained operator, change to the new operator if button is pressed several times
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === true
-                && flagNumber2 === false
-                && flagPrevCalc === true) {
+                && flagNumber2 === false) {
                     flagOperator = true;
                     if (button.id === "btnAdd") {operator = "add";}
                     else if (button.id === "btnSubtract") {operator = "subtract";}
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
-                    printEverything();
-                    break;
                 }
             // if operator pressed again in chained operation, display result, save result as number1, set flag for number2 to false
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === true
-                && flagNumber2 === true
-                && flagPrevCalc === true) {
+                && flagNumber2 === true) {
                     flagNumber2 = false;
-                    number1 = result;
+                    // number1 = result;
                     result = operate(operator, number1, number2);
                     display.textContent = result;
                     number2 = 0;
@@ -198,15 +185,12 @@ function populateDisplay(button) {
                     else if (button.id === "btnSubtract") {operator = "subtract";}
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
-                    printEverything();
-                    break;
                 }
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === true
-                && flagNumber2 === true
-                && flagPrevCalc === false) {
+                && flagNumber2 === true) {
                     flagNumber2 = false;
-                    flagPrevCalc = true;
+                    // flagPrevCalc = true;
                     result = operate(operator, number1, number2);
                     display.textContent = result;
                     number1 = result;
@@ -215,70 +199,108 @@ function populateDisplay(button) {
                     else if (button.id === "btnSubtract") {operator = "subtract";}
                     else if (button.id === "btnMultiply") {operator = "multiply";}
                     else if (button.id === "btnDivide") {operator = "divide";}
-                    printEverything();
-                    break;
                 }
+                toggleDecimal = false;
+                printEverything();
+                break;
         case "btnDot":
             // add dot
             // console.log(button.id)
+            // if flagnum1, flagop, flagnum2
+            // zero point .. or number.decimal
+            // set flag to true for decimal
+            // unset flag with operator button 
+            // roundDecimal() für alle operations a und b
+            // bei division auch beim result
+            // wenn mit punkt endet muss auch behandelt werden
+            if (toggleDecimal === false) {
+                if (flagNumber1 === false 
+                    && flagOperator === false
+                    && flagNumber2 === false) {
+                        flagNumber1 = true;
+                        number1 = "0.";
+                        display.textContent = number1;
+                    }
+                else if (flagNumber1 === true
+                    && flagOperator === false
+                    && flagNumber2 === false) {
+                        number1 = (String(number1) + ".")
+                        display.textContent = number1;
+                    }
+                else if (flagNumber1 === true
+                    && flagOperator === true
+                    && flagNumber2 === false) {
+                        flagNumber2 = true;
+                        number2 = "0.";
+                        display.textContent = number2;
+                    }
+                else if (flagNumber1 === true
+                    && flagOperator === true
+                    && flagNumber2 === true) {
+                        number2 = (String(number2) + ".")
+                        display.textContent = number2;
+                    }
+            toggleDecimal = true;
+            printEverything();
+            }
             break;
         case "btnEquals":
-            // calculate
-            // console.log(button.id)
             if (flagNumber1 === true 
                 && flagOperator === true
-                && flagNumber2 === true
-                && flagPrevCalc === false) {
-                    flagNumber1 = true;
+                && flagNumber2 === true) {
+                    flagNumber1 = false;
                     flagOperator = false;
                     flagNumber2 = false;
-                    flagPrevCalc = true;
+                    // flagPrevCalc = true;
                     // call operate function, print result, reset flags
                     result = operate(operator, number1, number2);
                     display.textContent = result;
-                    printEverything();
-                    break;
+                    number1 = 0;
+                    number2 = 0;
                 }
             // if press equal during chained operation
-            if (flagNumber1 === true 
+            else if (flagNumber1 === true 
                 && flagOperator === true
-                && flagNumber2 === true
-                && flagPrevCalc === true) {
-                    flagNumber1 = true;
+                && flagNumber2 === true) {
+                    flagNumber1 = false;
                     flagOperator = false;
                     flagNumber2 = false;
-                    flagPrevCalc = true;
+                    // flagPrevCalc = true;
                     // call operate function, print result, reset flags
                     result = operate(operator, number1, number2);
                     display.textContent = result;
-                    printEverything();
-                    break;
+                    number1 = 0;
+                    number2 = 0;
                 }
-            if (flagNumber1 === true 
+            // press equal button after entering num1
+            else if (flagNumber1 === true 
                 && flagOperator === false
                 && flagNumber2 === false) {
-                    flagNumber1 = true;
+                    flagNumber1 = false;
                     flagOperator = false;
                     flagNumber2 = false;
-                    flagPrevCalc = true;
+                    // flagPrevCalc = true;
                     // call operate function, print result, reset flags
                     result = number1;
                     display.textContent = result;
-                    printEverything();
-                    break;
+                    number1 = 0;
+                    number2 = 0;
                 }
-            if (flagNumber1 === true 
+            // press equal button after entering operator
+            else if (flagNumber1 === true 
                 && flagOperator === true
                 && flagNumber2 === false) {
-                    flagNumber1 = true;
-                    flagOperator = true;
+                    flagNumber1 = false;
+                    flagOperator = false;
                     flagNumber2 = false;
                     // call operate function, print result, reset flags
                     result = number1;
                     display.textContent = result;
-                    printEverything();
-                    break;
+                    number1 = 0;
+                    number2 = 0;
                 }
+                toggleDecimal = false;
+            printEverything();
             break;
         case "btnClear":
             // clear
@@ -299,11 +321,12 @@ function printEverything() {
     console.log("operator: " + operator);
     console.log("number1: " + number1);
     console.log("number2: " + number2);
+    console.log("dot: " + toggleDecimal);
     console.log("result: " + result);
     console.log("fNum1: " + flagNumber1);
     console.log("fOp: " + flagOperator);
     console.log("fNum2: " + flagNumber2);
-    console.log("fPrevC: " + flagPrevCalc);
+    // console.log("fPrevC: " + flagPrevCalc);
 }
 
 function roundToDecimal(number) {
@@ -314,7 +337,9 @@ function clearEverything() {
     flagNumber1 = false;
     flagOperator = false;
     flagNumber2 = false;
-    flagPrevCalc = false;
+    // flagPrevCalc = false;
+
+    toggleDecimal = false;
     
     number1 = 0;
     number2 = 0;
@@ -330,10 +355,12 @@ let number1 = 0;
 let number2 = 0;
 let result = 0;
 
+let toggleDecimal = false;
+
 let flagNumber1 = false;
 let flagOperator = false;
 let flagNumber2 = false;
-let flagPrevCalc = false;
+// let flagPrevCalc = false;
 
 // select all the buttons with the class name "btn"
 const buttons = document.querySelectorAll(".btn");
