@@ -282,6 +282,17 @@ function populateDisplay(button) {
         case "btnClear":
             // clear
             // console.log(button.id)
+            flagNumber1 = false;
+            flagOperator = false;
+            flagNumber2 = false;
+            flagPrevCalc = false;
+           
+            number1 = 0;
+            number2 = 0;
+            operator = "";
+            result = 0;
+            display.textContent = "";
+            printEverything();
             break;
         case "btnDelete":
             // delete
