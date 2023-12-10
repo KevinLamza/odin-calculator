@@ -390,3 +390,13 @@ buttons.forEach(function(button) {
     populateDisplay(button);
   });
 });
+
+document.addEventListener("keydown", (event) => {
+      const keyName = event.key;
+      if (event.key) {
+        alert(`${keyName}`);
+      } 
+    },
+    false,
+  );
+  
