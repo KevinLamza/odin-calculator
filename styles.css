@@ -1,10 +1,23 @@
+:root{
+        --gap: 5px;
+}
+
+body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+}
+
 body,
 .calculator, 
 .buttons,
 .operatorButtons, 
 .nonOperatorButtons, 
 .numericalButtons, 
-.nonNumericalButtons,
+.numericalButtonsRowZero,
 .numericalButtonsRowOne,
 .numericalButtonsRowTwo,
 .numericalButtonsRowThree,
@@ -21,10 +34,49 @@ body,
 
 .calculator {
         background-color: #F1DEC6;
+        flex: 0 1 400px;
+        height: 40vh;
+        padding: 10px;
 }
 
-body {
-        flex: 0 1 800px;
+.display {
+        flex: 1 1 20%;
+}
+
+.buttons {
+        flex: 1 1 80%;
+}
+
+.nonOperatorButtons {
+        flex: 1 1 75%;
+}
+
+.operatorButtons {
+        flex: 1 1 25%;
+}
+
+.numericalButtons {
+        flex: 1 1 20%;
+}
+
+.numericalButtonsRowZero,
+.numericalButtonsRowOne,
+.numericalButtonsRowTwo,
+.numericalButtonsRowThree,
+.numericalButtonsRowFour {
+        flex: 1 1 20%;
+}
+
+.buttons,
+.operatorButtons,
+.nonOperatorButtons,
+.numericalButtons,
+.numericalButtonsRowZero,
+.numericalButtonsRowOne,
+.numericalButtonsRowTwo,
+.numericalButtonsRowThree,
+.numericalButtonsRowFour {
+        gap: 5px;
 }
 
 #btnAdd,
@@ -33,11 +85,25 @@ body {
 #btnDivide,
 #btnEquals {
         background-color: #179BAE;
+        flex: 1 1 auto;
 }
 
 #btnClear,
 #btnDelete {
         background-color: #4158A6;
+}
+
+/* 
+Formula to change width to of flex basis to compensate for gap:
+width: (100% / n) - (((n -1) / n) * g); 
+*/
+
+#btnClear {
+        flex: 1 1 calc((100% * 2 / 3) - ((1 / 3) * var(--gap)));
+}
+
+#btnDelete {
+        flex: 1 1 calc((100% * 1 / 3) - (((3 - 1) / 3) * var(--gap)));
 }
 
 #btnNum1,
@@ -52,5 +118,13 @@ body {
 #btnNum0,
 #btnDot {
         background-color: #FF8343;
+        flex: 1 1 auto;
 }
 
+#btnNum0 {
+        flex: 1 1 calc((100% * 2 / 3) - ((1 / 3) * var(--gap)));
+}
+
+#btnDot {
+        flex: 1 1 calc((100% * 1 / 3) - (((3 - 1) / 3) * var(--gap)));
+}
