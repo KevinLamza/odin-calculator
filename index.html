@@ -8,26 +8,44 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="container">
-        <div id="display"></div>
-        <button class="btn" id="btnAdd">+</button>
-        <button class="btn" id="btnSubtract">-</button>
-        <button class="btn" id="btnMultiply">*</button>
-        <button class="btn" id="btnDivide">/</button>
-        <button class="btn" id="btnDot">.</button>
-        <button class="btn" id="btnEquals">=</button>
-        <button class="btn" id="btnClear">Clear</button>
-        <button class="btn" id="btnDelete">Delete</button>
-        <button class="btn" id="btnNum1">1</button>
-        <button class="btn" id="btnNum2">2</button>
-        <button class="btn" id="btnNum3">3</button>
-        <button class="btn" id="btnNum4">4</button>
-        <button class="btn" id="btnNum5">5</button>
-        <button class="btn" id="btnNum6">6</button>
-        <button class="btn" id="btnNum7">7</button>
-        <button class="btn" id="btnNum8">8</button>
-        <button class="btn" id="btnNum9">9</button>
-        <button class="btn" id="btnNum0">0</button>
+    <div class="calculator">
+        <div class="display"></div>
+        <div class="buttons">
+            <div class="nonOperatorButtons">
+                <div class="nonNumericalButtons">
+                    <button class="btn" id="btnClear">Clear</button>
+                    <button class="btn" id="btnDelete">Delete</button>
+                </div>
+                <div class="numericalButtons">
+                    <div class="numericalButtonsRowOne">
+                        <button class="btn" id="btnNum1">1</button>
+                        <button class="btn" id="btnNum2">2</button>
+                        <button class="btn" id="btnNum3">3</button>
+                    </div>
+                    <div class="numericalButtonsRowTwo">
+                        <button class="btn" id="btnNum4">4</button>
+                        <button class="btn" id="btnNum5">5</button>
+                        <button class="btn" id="btnNum6">6</button>
+                    </div>
+                    <div class="numericalButtonsRowThree">
+                        <button class="btn" id="btnNum7">7</button>
+                        <button class="btn" id="btnNum8">8</button>
+                        <button class="btn" id="btnNum9">9</button>
+                    </div>
+                    <div class="numericalButtonsRowFour">
+                        <button class="btn" id="btnNum0">0</button>
+                        <button class="btn" id="btnDot">.</button>
+                    </div>
+                </div>    
+            </div>
+            <div class="operatorButtons">
+                <button class="btn" id="btnAdd">+</button>
+                <button class="btn" id="btnSubtract">-</button>
+                <button class="btn" id="btnMultiply">*</button>
+                <button class="btn" id="btnDivide">/</button>
+                <button class="btn" id="btnEquals">=</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

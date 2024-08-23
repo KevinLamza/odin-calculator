@@ -381,7 +381,7 @@ let flagNumber2 = false;
 const buttons = document.querySelectorAll(".btn");
 
 // select display
-const display = document.querySelector("#display");
+const display = document.querySelector(".display");
 display.textContent = "0";
 
 // loop through each button and add a click event listener

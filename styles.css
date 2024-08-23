@@ -1,0 +1,56 @@
+body,
+.calculator, 
+.buttons,
+.operatorButtons, 
+.nonOperatorButtons, 
+.numericalButtons, 
+.nonNumericalButtons,
+.numericalButtonsRowOne,
+.numericalButtonsRowTwo,
+.numericalButtonsRowThree,
+.numericalButtonsRowFour  {
+        display: flex;    
+}
+
+.calculator,
+.operatorButtons,
+.nonOperatorButtons,
+.numericalButtons {
+        flex-direction: column;
+}
+
+.calculator {
+        background-color: #F1DEC6;
+}
+
+body {
+        flex: 0 1 800px;
+}
+
+#btnAdd,
+#btnSubtract,
+#btnMultiply,
+#btnDivide,
+#btnEquals {
+        background-color: #179BAE;
+}
+
+#btnClear,
+#btnDelete {
+        background-color: #4158A6;
+}
+
+#btnNum1,
+#btnNum2,
+#btnNum3,
+#btnNum4,
+#btnNum5,
+#btnNum6,
+#btnNum7,
+#btnNum8,
+#btnNum9,
+#btnNum0,
+#btnDot {
+        background-color: #FF8343;
+}
+
