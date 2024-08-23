@@ -384,6 +384,8 @@ const buttons = document.querySelectorAll(".btn");
 const display = document.querySelector(".display");
 display.textContent = "0";
 
+let preClickButtonColor = 0;
+
 // loop through each button and add a click event listener
 buttons.forEach(function(button) {
   button.addEventListener("click", function() {
@@ -392,11 +394,20 @@ buttons.forEach(function(button) {
   });
 });
 
-document.addEventListener("keydown", (event) => {
+buttons.forEach(function(button) {
+    button.addEventListener("mousedown", function() {
+    buttonDown(this);
+    });
+  });
+
+  buttons.forEach(function(button) {
+    button.addEventListener("mouseup", function() {
+      buttonRelease(this);
+    });
+  });
+
+document.addEventListener("keypress", (event) => {
       const keyName = event.key;
-    //   if (event.key) {
-    //     alert(`${keyName}`);
-    //   } 
       if (keyName == "1") populateDisplay(btnNum1);
       if (keyName == "2") populateDisplay(btnNum2);
       if (keyName == "3") populateDisplay(btnNum3);
@@ -418,4 +429,63 @@ document.addEventListener("keydown", (event) => {
     },
     false,
   );
+
+  document.addEventListener("keydown", (event) => {
+    const keyName = event.key;
+    if (keyName == "1") buttonDown(btnNum1);
+    if (keyName == "2") buttonDown(btnNum2);
+    if (keyName == "3") buttonDown(btnNum3);
+    if (keyName == "4") buttonDown(btnNum4);
+    if (keyName == "5") buttonDown(btnNum5);
+    if (keyName == "6") buttonDown(btnNum6);
+    if (keyName == "7") buttonDown(btnNum7);
+    if (keyName == "8") buttonDown(btnNum8);
+    if (keyName == "9") buttonDown(btnNum9);
+    if (keyName == "0") buttonDown(btnNum0);
+    if (keyName == "+") buttonDown(btnAdd);
+    if (keyName == "-") buttonDown(btnSubtract);
+    if (keyName == "*") buttonDown(btnMultiply);
+    if (keyName == "/") buttonDown(btnDivide);
+    if (keyName == ".") buttonDown(btnDot);
+    if (keyName == "Enter") buttonDown(btnEquals);
+    if (keyName == "c") buttonDown(btnClear);
+    if (keyName == "d") buttonDown(btnDelete);
+  },
+  false,
+);
+
+document.addEventListener("keyup", (event) => {
+    const keyName = event.key;
+    if (keyName == "1") buttonRelease(btnNum1);
+    if (keyName == "2") buttonRelease(btnNum2);
+    if (keyName == "3") buttonRelease(btnNum3);
+    if (keyName == "4") buttonRelease(btnNum4);
+    if (keyName == "5") buttonRelease(btnNum5);
+    if (keyName == "6") buttonRelease(btnNum6);
+    if (keyName == "7") buttonRelease(btnNum7);
+    if (keyName == "8") buttonRelease(btnNum8);
+    if (keyName == "9") buttonRelease(btnNum9);
+    if (keyName == "0") buttonRelease(btnNum0);
+    if (keyName == "+") buttonRelease(btnAdd);
+    if (keyName == "-") buttonRelease(btnSubtract);
+    if (keyName == "*") buttonRelease(btnMultiply);
+    if (keyName == "/") buttonRelease(btnDivide);
+    if (keyName == ".") buttonRelease(btnDot);
+    if (keyName == "Enter") buttonRelease(btnEquals);
+    if (keyName == "c") buttonRelease(btnClear);
+    if (keyName == "d") buttonRelease(btnDelete);
+  },
+  false,
+);
   
+function buttonDown(button) {
+    const id = button.id;
+    const element = document.querySelector('#'+id);
+    const style = getComputedStyle(element);
+    preClickButtonColor = style.backgroundColor;
+    button.style.backgroundColor = "#DAF7A6";
+}
+
+function buttonRelease(button){
+    button.style.backgroundColor = preClickButtonColor;
+}
