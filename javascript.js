@@ -359,7 +359,7 @@ function clearEverything() {
     number2 = 0;
     operator = "";
     result = 0;
-    display.textContent = "";
+    display.textContent = "0";
     printEverything();
 }
 
@@ -382,6 +382,7 @@ const buttons = document.querySelectorAll(".btn");
 
 // select display
 const display = document.querySelector("#display");
+display.textContent = "0";
 
 // loop through each button and add a click event listener
 buttons.forEach(function(button) {
