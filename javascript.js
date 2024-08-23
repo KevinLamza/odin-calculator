@@ -393,9 +393,27 @@ buttons.forEach(function(button) {
 
 document.addEventListener("keydown", (event) => {
       const keyName = event.key;
-      if (event.key) {
-        alert(`${keyName}`);
-      } 
+    //   if (event.key) {
+    //     alert(`${keyName}`);
+    //   } 
+      if (keyName == "1") populateDisplay(btnNum1);
+      if (keyName == "2") populateDisplay(btnNum2);
+      if (keyName == "3") populateDisplay(btnNum3);
+      if (keyName == "4") populateDisplay(btnNum4);
+      if (keyName == "5") populateDisplay(btnNum5);
+      if (keyName == "6") populateDisplay(btnNum6);
+      if (keyName == "7") populateDisplay(btnNum7);
+      if (keyName == "8") populateDisplay(btnNum8);
+      if (keyName == "9") populateDisplay(btnNum9);
+      if (keyName == "0") populateDisplay(btnNum0);
+      if (keyName == "+") populateDisplay(btnAdd);
+      if (keyName == "-") populateDisplay(btnSubtract);
+      if (keyName == "*") populateDisplay(btnMultiply);
+      if (keyName == "/") populateDisplay(btnDivide);
+      if (keyName == ".") populateDisplay(btnDot);
+      if (keyName == "Enter") populateDisplay(btnEquals);
+      if (keyName == "c") populateDisplay(btnClear);
+      if (keyName == "d") populateDisplay(btnDelete);
     },
     false,
   );
